@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .slack_utils import send_message
 from .slack_listeners import handler
 
+@csrf_exempt
 def slack_events_handler(request):
     return handler.handle(request)
 
