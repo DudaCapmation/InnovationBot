@@ -46,7 +46,7 @@ def run_agent_background (user_text: str, say, thread_ts: str | None):
         say(reply, thread_ts=thread_ts)
     except Exception:
         logger.exception("Agent failed.")
-        say(text="Sorry, an error has occurred. Try again later.")
+        say(text="Sorry, an error has occurred. Try again later.", thread_ts=thread_ts)
 
 @app.event("message")
 def handle_direct_messages(logger, event, say):
