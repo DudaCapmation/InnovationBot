@@ -5,7 +5,7 @@ import logging
 from dotenv import load_dotenv
 from slack_bolt import App
 from slack_bolt.adapter.django import SlackRequestHandler
-from agent import run_agent
+from .agent import run_agent
 
 load_dotenv()
 

@@ -2,7 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from langchain_core.tools import tool
-from pydantic_models import Initiative
+from .pydantic_models import Initiative
 
 load_dotenv()
 
