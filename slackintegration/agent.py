@@ -1,7 +1,6 @@
-import os
 from dotenv import load_dotenv
 from langchain.agents import create_tool_calling_agent, AgentExecutor
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from .tools import get_initiatives, get_initiative_by_id, create_initiative, update_initiative, delete_initiative, get_status_list
 
@@ -16,7 +15,7 @@ ADMIN_PROMPT = ChatPromptTemplate.from_template(
 
 def run_agent(user_instruction: str) -> str:
 
-    llm = ChatOpenAI(model="gpt-4o-mini", openai_api_key=os.getenv("OPENAI_API_KEY"))
+    llm = ChatOpenAI(model="gpt-4o-mini")
     tools = [get_initiatives, get_initiative_by_id, create_initiative, update_initiative, delete_initiative, get_status_list]
 
     agent = create_tool_calling_agent(llm, tools, prompt=ADMIN_PROMPT)

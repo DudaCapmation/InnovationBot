@@ -11,6 +11,12 @@ OUTSYSYEMS_BASE_URL = os.getenv("OUTSYSYEMS_BASE_URL")
 
 @tool
 def get_initiatives():
+    """
+    Retrieves a list of all initiatives in the system.
+    Returns each initiative with its Id (integer), Name (string), StatusId (integer),
+    StartDate (date), EndDate (date), TargetEndDate (date), and Description (string).
+    """
+
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/GetInitiatives"
     request = requests.post(
         url=url)
@@ -20,6 +26,11 @@ def get_initiatives():
 
 @tool
 def get_initiative_by_id(initiative_id: int) -> dict:
+    """
+    Retrieves details of a specific initiative by its Id.
+    Expects an integer Id and returns the initiative data if it exists.
+    """
+
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/GetInitiativeById?InitiativeId={initiative_id}"
     request = requests.post(
         url=url)
@@ -29,6 +40,12 @@ def get_initiative_by_id(initiative_id: int) -> dict:
 
 @tool
 def create_initiative(initiative: dict):
+    """
+    Creates a new initiative in the system.
+    Expects a dictionary with keys: Id (integer), Name (string), StatusId (integer),
+    StartDate (date), EndDate (date), TargetEndDate (date), and Description (string).
+    """
+
     # Data validation
     initiative = Initiative.model_validate(initiative)
 
@@ -45,6 +62,12 @@ def create_initiative(initiative: dict):
 
 @tool
 def update_initiative(initiative: dict):
+    """
+    Updates an existing initiative.
+    Expects a dictionary with keys: Id (integer), Name (string), StatusId (integer),
+    StartDate (date), EndDate (date), TargetEndDate (date), and Description (string).
+    """
+
     # Data validation
     initiative = Initiative.model_validate(initiative)
 
@@ -61,6 +84,11 @@ def update_initiative(initiative: dict):
 
 @tool
 def delete_initiative(initiative_id: int) -> dict:
+    """
+    Deletes an existing initiative by its Id.
+    Expects an integer Id.
+    """
+
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/DeleteInitiative?InitiativeId={initiative_id}"
     request = requests.post(
         url=url)
@@ -70,6 +98,11 @@ def delete_initiative(initiative_id: int) -> dict:
 
 @tool
 def get_status_list():
+    """
+    Returns the list of possible initiative statuses.
+    The list includes: Pending, In Progress, Completed, Canceled.
+    """
+
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/GetStatusList"
     request = requests.post(
         url=url)
