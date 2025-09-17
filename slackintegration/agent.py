@@ -6,12 +6,14 @@ from .tools import get_initiatives, get_initiative_by_id, create_initiative, upd
 
 load_dotenv()
 
-ADMIN_PROMPT = ChatPromptTemplate.from_template(
-    "You are an Admin Agent and Chatbot called Innovation Bot with access to system tools."
-    "Use tools only when necessary and feel free to ask the user for clarification if/when needed."
-    "Always reply to the user's message in a polite and professional way."
-    "User's message: {input}"
-    "{agent_scratchpad}"
+ADMIN_PROMPT = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are an Admin Agent and Chatbot called Innovation Bot with access to system tools."
+                    "Use tools only when necessary and feel free to ask the user for clarification if/when needed."
+                    "Always reply to the user's message in a polite and professional way."),
+        ("human", "{input}"),
+        ("placeholder", "{agent_scratchpad}"),
+    ]
 )
 
 def run_agent(user_instruction: str) -> str:
