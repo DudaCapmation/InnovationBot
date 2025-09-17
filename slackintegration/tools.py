@@ -18,7 +18,7 @@ def get_initiatives():
     """
 
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/GetInitiatives"
-    request = requests.post(
+    request = requests.get(
         url=url)
     request.raise_for_status()
 
@@ -32,7 +32,7 @@ def get_initiative_by_id(initiative_id: int) -> dict:
     """
 
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/GetInitiativeById?InitiativeId={initiative_id}"
-    request = requests.post(
+    request = requests.get(
         url=url)
     request.raise_for_status()
 
@@ -75,7 +75,7 @@ def update_initiative(initiative: dict):
     json_payload = initiative.model_dump(by_alias=True)
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/UpdateInitiative"
 
-    request = requests.post(
+    request = requests.put(
         url=url,
         json=json_payload)
     request.raise_for_status()
@@ -90,7 +90,7 @@ def delete_initiative(initiative_id: int) -> dict:
     """
 
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/DeleteInitiative?InitiativeId={initiative_id}"
-    request = requests.post(
+    request = requests.get(
         url=url)
     request.raise_for_status()
 
@@ -104,7 +104,7 @@ def get_status_list():
     """
 
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/GetStatusList"
-    request = requests.post(
+    request = requests.get(
         url=url)
     request.raise_for_status()
 

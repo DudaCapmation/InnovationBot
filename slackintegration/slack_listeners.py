@@ -82,7 +82,7 @@ def handle_direct_messages(logger, event, say):
     t.start()
 
     # Quick message to user
-    say(text="Got it! Working on it!", thread_ts=thread)
+    # say(text="Got it! Working on it!", thread_ts=thread)
 
 
 @app.event("app_mention")
@@ -123,7 +123,7 @@ def handle_app_mentions(logger, event, say):
     t.start()
 
     # Quick message to user
-    say(text="Got it! Working on it!", thread_ts=thread)
+    # say(text="Got it! Working on it!", thread_ts=thread)
 
 
 # Expose the Django handler
