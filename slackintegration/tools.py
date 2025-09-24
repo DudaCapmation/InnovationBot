@@ -50,13 +50,13 @@ def create_initiative(initiative: dict):
     """
 
     # Data validation
-    try:
-        initiative = Initiative.model_validate(initiative)
-    except ValidationError as e:
-        return {"status": "error", "type": "validation", "errors": e.errors()}
+    #try:
+    #    initiative = Initiative.model_validate(initiative)
+    #except ValidationError as e:
+    #    return {"status": "error", "type": "validation", "errors": e.errors()}
 
     # Building final payload
-    json_payload = initiative.model_dump(by_alias=True)
+    json_payload = initiative
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/CreateInitiative"
 
     request = requests.post(
@@ -75,13 +75,13 @@ def update_initiative(initiative: dict):
     """
 
     # Data validation
-    try:
-        initiative = Initiative.model_validate(initiative)
-    except ValidationError as e:
-        return {"status": "error", "type": "validation", "errors": e.errors()}
+    #try:
+    #    initiative = Initiative.model_validate(initiative)
+    #except ValidationError as e:
+    #    return {"status": "error", "type": "validation", "errors": e.errors()}
 
     # Building final payload
-    json_payload = initiative.model_dump(by_alias=True)
+    json_payload = initiative
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/UpdateInitiative"
 
     request = requests.put(
