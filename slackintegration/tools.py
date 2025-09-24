@@ -42,7 +42,9 @@ def get_initiative_by_id(initiative_id: int) -> dict:
     return request.json()
 
 @tool
-def create_initiative(initiative: dict):
+def create_initiative(initiative_id: int = None, name: str = None, status_id: int = None,
+                      start_date: str = None, end_date: str = None,
+                      target_end_date: str = None, description: str = None):
     """
     Creates a new initiative in the system.
     Expects a dictionary with keys: Id (integer), Name (string), StatusId (integer),
@@ -56,7 +58,16 @@ def create_initiative(initiative: dict):
     #    return {"status": "error", "type": "validation", "errors": e.errors()}
 
     # Building final payload
-    json_payload = initiative
+    json_payload = {
+        "Id": initiative_id,
+        "Name": name,
+        "StatusId": status_id,
+        "StartDate": start_date,
+        "EndDate": end_date,
+        "TargetEndDate": target_end_date,
+        "Description": description,
+    }
+
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/CreateInitiative"
 
     request = requests.post(
@@ -67,7 +78,9 @@ def create_initiative(initiative: dict):
     return request.json()
 
 @tool
-def update_initiative(initiative: dict):
+def update_initiative(initiative_id: int = None, name: str = None, status_id: int = None,
+                      start_date: str = None, end_date: str = None,
+                      target_end_date: str = None, description: str = None):
     """
     Updates an existing initiative.
     Expects a dictionary with keys: Id (integer), Name (string), StatusId (integer),
@@ -81,7 +94,16 @@ def update_initiative(initiative: dict):
     #    return {"status": "error", "type": "validation", "errors": e.errors()}
 
     # Building final payload
-    json_payload = initiative
+    json_payload = {
+        "Id": initiative_id,
+        "Name": name,
+        "StatusId": status_id,
+        "StartDate": start_date,
+        "EndDate": end_date,
+        "TargetEndDate": target_end_date,
+        "Description": description,
+    }
+
     url = f"{OUTSYSYEMS_BASE_URL}/InnovationInitiatives_CS/rest/InnovationApp/UpdateInitiative"
 
     request = requests.put(
