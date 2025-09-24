@@ -2,10 +2,6 @@ import os
 import requests
 from dotenv import load_dotenv
 from langchain_core.tools import tool
-from marshmallow import ValidationError
-from pydantic import ValidationError
-
-from .pydantic_models import Initiative
 
 load_dotenv()
 
@@ -55,13 +51,6 @@ def create_initiative(initiative_id: int,
     StartDate (date), EndDate (Optional) (date), TargetEndDate (date), and Description (string).
     """
 
-    # Data validation
-    #try:
-    #    initiative = Initiative.model_validate(initiative)
-    #except ValidationError as e:
-    #    return {"status": "error", "type": "validation", "errors": e.errors()}
-
-    # Building final payload
     json_payload = {
         "Id": initiative_id,
         "Name": name,
@@ -79,7 +68,11 @@ def create_initiative(initiative_id: int,
         json=json_payload)
     request.raise_for_status()
 
-    return request.json()
+    return {
+        "status": "ok",
+        "message": f"Initiative '{name}' created successfully.",
+        "id": initiative_id,
+    }
 
 @tool
 def update_initiative(initiative_id: int,
@@ -95,13 +88,6 @@ def update_initiative(initiative_id: int,
     StartDate (date), EndDate (Optional) (date), TargetEndDate (date), and Description (string).
     """
 
-    # Data validation
-    #try:
-    #    initiative = Initiative.model_validate(initiative)
-    #except ValidationError as e:
-    #    return {"status": "error", "type": "validation", "errors": e.errors()}
-
-    # Building final payload
     json_payload = {
         "Id": initiative_id,
         "Name": name,
@@ -119,7 +105,11 @@ def update_initiative(initiative_id: int,
         json=json_payload)
     request.raise_for_status()
 
-    return request.json()
+    return {
+        "status": "ok",
+        "message": f"Initiative '{name}' updated successfully.",
+        "id": initiative_id,
+    }
 
 @tool
 def delete_initiative(initiative_id: int) -> dict:
