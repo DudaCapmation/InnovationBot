@@ -42,13 +42,17 @@ def get_initiative_by_id(initiative_id: int) -> dict:
     return request.json()
 
 @tool
-def create_initiative(initiative_id: int = None, name: str = None, status_id: int = None,
-                      start_date: str = None, end_date: str = None,
-                      target_end_date: str = None, description: str = None):
+def create_initiative(initiative_id: int,
+                      name: str,
+                      status_id: int,
+                      start_date: str | None = None,
+                      end_date: str | None = None,
+                      target_end_date: str | None = None,
+                      description: str | None = None):
     """
     Creates a new initiative in the system.
     Expects a dictionary with keys: Id (integer), Name (string), StatusId (integer),
-    StartDate (date), EndDate (date), TargetEndDate (date), and Description (string).
+    StartDate (date), EndDate (Optional) (date), TargetEndDate (date), and Description (string).
     """
 
     # Data validation
@@ -78,13 +82,17 @@ def create_initiative(initiative_id: int = None, name: str = None, status_id: in
     return request.json()
 
 @tool
-def update_initiative(initiative_id: int = None, name: str = None, status_id: int = None,
-                      start_date: str = None, end_date: str = None,
-                      target_end_date: str = None, description: str = None):
+def update_initiative(initiative_id: int,
+                      name: str,
+                      status_id: int,
+                      start_date: str | None = None,
+                      end_date: str | None = None,
+                      target_end_date: str | None = None,
+                      description: str | None = None):
     """
     Updates an existing initiative.
     Expects a dictionary with keys: Id (integer), Name (string), StatusId (integer),
-    StartDate (date), EndDate (date), TargetEndDate (date), and Description (string).
+    StartDate (date), EndDate (Optional) (date), TargetEndDate (date), and Description (string).
     """
 
     # Data validation
