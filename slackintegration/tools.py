@@ -2,6 +2,9 @@ import os
 import requests
 from dotenv import load_dotenv
 from langchain_core.tools import tool
+from marshmallow import ValidationError
+from pydantic import ValidationError
+
 from .pydantic_models import Initiative
 
 load_dotenv()
@@ -47,7 +50,10 @@ def create_initiative(initiative: dict):
     """
 
     # Data validation
-    initiative = Initiative.model_validate(initiative)
+    try:
+        initiative = Initiative.model_validate(initiative)
+    except ValidationError as e:
+        return {"status": "error", "type": "validation", "errors": e.errors()}
 
     # Building final payload
     json_payload = initiative.model_dump(by_alias=True)
@@ -69,7 +75,10 @@ def update_initiative(initiative: dict):
     """
 
     # Data validation
-    initiative = Initiative.model_validate(initiative)
+    try:
+        initiative = Initiative.model_validate(initiative)
+    except ValidationError as e:
+        return {"status": "error", "type": "validation", "errors": e.errors()}
 
     # Building final payload
     json_payload = initiative.model_dump(by_alias=True)

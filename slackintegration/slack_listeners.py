@@ -38,11 +38,11 @@ def agent_reply(user_text: str, say):
         logger.exception("Failed to get reply or send message.")
         say(text="Sorry, an error has occurred. Try again later.")
 
-def run_agent_background (user_text: str, say, thread_ts: str | None):
+def run_agent_background (user_text: str, slack_client, slack_user_id, say, thread_ts: str | None):
     # Runs agent in background
 
     try:
-        reply = run_agent(user_instruction=user_text)
+        reply = run_agent(user_instruction=user_text, slack_client=slack_client, slack_user_id=slack_user_id)
         say(reply, thread_ts=thread_ts)
     except Exception:
         logger.exception("Agent failed.")
@@ -75,8 +75,8 @@ def handle_direct_messages(logger, event, say):
 
     # Start background job and return immediately
     t = threading.Thread(
-        target=run_agent_background(user_text=user_text,say=say, thread_ts=thread),
-        args=(user_text.strip(), True, say, thread),
+        target=run_agent_background,
+        args=(user_text.strip(), app.client, user, say, thread),
         daemon=True,
     )
     t.start()
@@ -116,8 +116,8 @@ def handle_app_mentions(logger, event, say):
 
     # Start background job and return immediately
     t = threading.Thread(
-        target=run_agent_background(user_text=user_text,say=say, thread_ts=thread),
-        args=(user_text.strip(), True, say, thread),
+        target=run_agent_background,
+        args=(user_text.strip(), app.client, user, say, thread),
         daemon=True,
     )
     t.start()
