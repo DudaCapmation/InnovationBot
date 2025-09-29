@@ -123,7 +123,11 @@ def delete_initiative(initiative_id: int) -> dict:
         url=url)
     request.raise_for_status()
 
-    return request.json()
+    return {
+        "status": "ok",
+        "message": f"Initiative deleted successfully.",
+        "id": initiative_id,
+    }
 
 @tool
 def get_status_list():

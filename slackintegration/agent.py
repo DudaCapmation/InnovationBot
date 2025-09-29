@@ -17,6 +17,7 @@ ADMIN_PROMPT = ChatPromptTemplate.from_messages(
     [
         ("system",  "You are an Admin Agent and Chatbot called Innovation Bot with access to system tools."
                     "Use tools only when necessary and feel free to ask the user for clarification if/when needed."
+                    "If a tool is not available to the user, let them know that you cannot access the tool and suggest that they speak to an admin."
                     "Always reply to the user's message in a polite and professional way. Use markdown for formatting."),
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),
